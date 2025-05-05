@@ -10,59 +10,90 @@ class ParkingScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF003E29),
         title: const Text('deezpark', style: TextStyle(color: Colors.white)),
-      ),
-      drawer: Drawer(
-        backgroundColor: Color(0xFF003E29),
-        child: ListView(
-          padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(color: Color(0xFF003E29)),
-                child: Text('Milwaukee, WI', style: TextStyle(color: Colors.white, fontSize: 20)),
+        iconTheme: const IconThemeData(color: Colors.white),
+    ),
+drawer: Drawer(
+  backgroundColor: const Color(0xFF003E29),
+  child: Builder(
+    builder: (context) => ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: const BoxDecoration(color: Color(0xFF003E29)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.white,
+                child: Text(
+                  'P',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Color(0xFF003E29),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              ListTile(
-                leading: const Icon(Icons.dashboard),
-                title: const Text('Home'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/landing');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.badge),
-                title: const Text('Permit'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/permit');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.cleaning_services),
-                title: const Text('Street Sweeping'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/sweeping');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.history),
-                title: const Text('Parking History'),
-                onTap: () {
-                  Navigator.pop(context);
-                  // TODO: Navigator.pushNamed(context, '/history');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.location_on),
-                title: const Text('Location Tracking'),
-                onTap: () {
-                  Navigator.pop(context);
-                  // TODO: Navigator.pushNamed(context, '/location');
-                },
+              SizedBox(height: 12),
+              Text(
+                'Milwaukee, WI',
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ],
+          ),
         ),
-      ),
+        ListTile(
+          leading: const Icon(Icons.home, color: Colors.white),
+          title: const Text('Home', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.dashboard, color: Colors.white),
+          title: const Text('Overview', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/overview');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.badge, color: Colors.white),
+          title: const Text('Permit', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/permit');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.cleaning_services, color: Colors.white),
+          title: const Text('Street Sweeping', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/sweeping');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.history, color: Colors.white),
+          title: const Text('Parking History', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.location_on, color: Colors.white),
+          title: const Text('Location Tracking', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    ),
+  ),
+),
+
       body: SingleChildScrollView(
         child: Center(
           child: Padding(

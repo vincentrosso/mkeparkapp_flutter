@@ -17,6 +17,7 @@ class DeezParkApp extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF003E29),
         title: const Text('DeezPark'),
+        iconTheme: const IconThemeData(color: Colors.white), // ← sets hamburger AND back arrow
       ),
 drawer: Drawer(
   backgroundColor: const Color(0xFF003E29),
@@ -27,44 +28,6 @@ drawer: Drawer(
         const DrawerHeader(
           decoration: BoxDecoration(color: Color(0xFF003E29)),
           child: Text('Milwaukee, WI', style: TextStyle(color: Colors.white, fontSize: 20)),
-        ),
-        ListTile(
-          leading: const Icon(Icons.dashboard, color: Colors.white),
-          title: const Text('Parking', style: TextStyle(color: Colors.white)),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, '/parking');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.badge, color: Colors.white),
-          title: const Text('Permit', style: TextStyle(color: Colors.white)),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, '/permit');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.cleaning_services, color: Colors.white),
-          title: const Text('Street Sweeping', style: TextStyle(color: Colors.white)),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, '/sweeping');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.history, color: Colors.white),
-          title: const Text('Parking History', style: TextStyle(color: Colors.white)),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.location_on, color: Colors.white),
-          title: const Text('Location Tracking', style: TextStyle(color: Colors.white)),
-          onTap: () {
-            Navigator.pop(context);
-          },
         ),
       ],
     ),
@@ -91,7 +54,6 @@ drawer: Drawer(
         '/parking': (context) => ParkingScreen(),
         '/permit': (context) => PermitScreen(),
         '/sweeping': (context) => StreetSweepingScreen(),
-        // Add '/history' and '/location' here when screens are ready
       },
     );
   }
