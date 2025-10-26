@@ -29,3 +29,51 @@ workflows:
       email:
         recipients:
           - your@email.com
+  ios-release:
+    name: Build iOS IPA
+    environment:
+      flutter: stable
+      xcode: latest
+      groups:
+        - app_store_credentials
+      vars:
+        PACKAGE_NAME: "com.example.app"
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - ~/Library/Caches/CocoaPods
+    scripts:
+      - name: Clean build directories
+        script: flutter clean
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build IPA
+        script: flutter build ipa --release
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - your@email.com
+  web-release:
+    name: Build Web App
+    environment:
+      flutter: stable
+      vars:
+        BUILD_DIR: build/web
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+    scripts:
+      - name: Clean build directories
+        script: flutter clean
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build web release
+        script: flutter build web --release
+    artifacts:
+      - $BUILD_DIR/**
+    publishing:
+      email:
+        recipients:
+          - your@email.com
