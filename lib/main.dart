@@ -3,6 +3,8 @@ import 'screens/welcome_screen.dart';
 import 'screens/parking_screen.dart';
 import 'screens/permit_screen.dart';
 import 'screens/street_sweeping_screen.dart';
+import 'screens/history_screen.dart';
+import 'screens/landing_screen.dart';
 
 void main() {
   runApp(const DeezParkApp());
@@ -19,21 +21,20 @@ class DeezParkApp extends StatelessWidget {
         title: const Text('DeezPark'),
         iconTheme: const IconThemeData(color: Colors.white), // ← sets hamburger AND back arrow
       ),
-drawer: Drawer(
-  backgroundColor: const Color(0xFF003E29),
-  child: Builder(
-    builder: (context) => ListView(
-      padding: EdgeInsets.zero,
-      children: [
-        const DrawerHeader(
-          decoration: BoxDecoration(color: Color(0xFF003E29)),
-          child: Text('Milwaukee, WI', style: TextStyle(color: Colors.white, fontSize: 20)),
+      drawer: Drawer(
+        backgroundColor: const Color(0xFF003E29),
+        child: Builder(
+          builder: (context) => ListView(
+            padding: EdgeInsets.zero,
+            children: const [
+              DrawerHeader(
+                decoration: BoxDecoration(color: Color(0xFF003E29)),
+                child: Text('Milwaukee, WI', style: TextStyle(color: Colors.white, fontSize: 20)),
+              ),
+            ],
+          ),
         ),
-      ],
-    ),
-  ),
-),
-
+      ),
       body: child,
     );
   }
@@ -51,9 +52,11 @@ drawer: Drawer(
       initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),
-        '/parking': (context) => ParkingScreen(),
-        '/permit': (context) => PermitScreen(),
-        '/sweeping': (context) => StreetSweepingScreen(),
+        '/parking': (context) => const ParkingScreen(),
+        '/permit': (context) => const PermitScreen(),
+        '/sweeping': (context) => const StreetSweepingScreen(),
+        '/history': (context) => HistoryScreen(),
+        '/landing': (context) => LandingScreen(),
       },
     );
   }
