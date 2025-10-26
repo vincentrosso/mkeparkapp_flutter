@@ -103,3 +103,99 @@ workflows:
       email:
         recipients:
           - your@email.com
+  android-google-play:
+    name: Publish Android to Google Play
+    environment:
+      flutter: stable
+      java: 17
+      groups:
+        - keystore_credentials
+        - google_play_credentials
+      vars:
+        PACKAGE_NAME: "com.example.app"
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.pub-cache
+    scripts:
+      - name: Clean build directories
+        script: |
+          flutter clean
+          rm -rf ~/.gradle/caches/*/fileHashes
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build app bundle
+        script: flutter build appbundle --release
+    artifacts:
+      - build/app/outputs/bundle/release/app-release.aab
+    publishing:
+      google_play:
+        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT
+        track: internal
+      email:
+        recipients:
+          - your@email.com
+  ios-app-store:
+    name: Publish iOS to App Store
+    environment:
+      flutter: stable
+      xcode: latest
+      groups:
+        - app_store_connect_credentials
+      vars:
+        PACKAGE_NAME: "com.example.app"
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - ~/Library/Caches/CocoaPods
+    scripts:
+      - name: Clean build directories
+        script: flutter clean
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build IPA
+        script: flutter build ipa --release
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_API_KEY
+        key_id: $APP_STORE_CONNECT_KEY_ID
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_app_store: true
+        submit_to_testflight: false
+      email:
+        recipients:
+          - your@email.com
+  ios-testflight:
+    name: Publish iOS to TestFlight
+    environment:
+      flutter: stable
+      xcode: latest
+      groups:
+        - app_store_connect_credentials
+      vars:
+        PACKAGE_NAME: "com.example.app"
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - ~/Library/Caches/CocoaPods
+    scripts:
+      - name: Clean build directories
+        script: flutter clean
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build IPA
+        script: flutter build ipa --release
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_API_KEY
+        key_id: $APP_STORE_CONNECT_KEY_ID
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_app_store: false
+        submit_to_testflight: true
+      email:
+        recipients:
+          - your@email.com
