@@ -8,13 +8,12 @@ workflows:
         - keystore_credentials
       vars:
         PACKAGE_NAME: "com.example.app"
-      cache:
-        cache_paths:
-          - ~/.gradle/caches
-          - ~/.pub-cache
-      environment_variables:
         JAVA_TOOL_OPTIONS: "-Xmx4096m"
         GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=1024m"
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.pub-cache
     scripts:
       - name: Clean build directories
         script: |
