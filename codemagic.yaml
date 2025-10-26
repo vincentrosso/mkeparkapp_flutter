@@ -29,6 +29,32 @@ workflows:
       email:
         recipients:
           - your@email.com
+  android-apk:
+    name: Build Android APK
+    environment:
+      flutter: stable
+      java: 17
+      groups:
+        - keystore_credentials
+      vars:
+        PACKAGE_NAME: "com.example.app"
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.pub-cache
+    scripts:
+      - name: Clean build directories
+        script: flutter clean
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - your@email.com
   ios-release:
     name: Build iOS IPA
     environment:
