@@ -1,0 +1,32 @@
+workflows:
+  android-release:
+    name: Build Android AAB
+    environment:
+      flutter: stable
+      java: 17
+      groups:
+        - keystore_credentials
+      vars:
+        PACKAGE_NAME: "com.example.app"
+      cache:
+        cache_paths:
+          - ~/.gradle/caches
+          - ~/.pub-cache
+      environment_variables:
+        JAVA_TOOL_OPTIONS: "-Xmx4096m"
+        GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=1024m"
+    scripts:
+      - name: Clean build directories
+        script: |
+          flutter clean
+          rm -rf ~/.gradle/caches/*/fileHashes
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build app bundle
+        script: flutter build appbundle --release
+    artifacts:
+      - build/app/outputs/bundle/release/app-release.aab
+    publishing:
+      email:
+        recipients:
+          - your@email.com
